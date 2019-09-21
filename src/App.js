@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import AlertIcon from 'mdi-react/AlertIcon';
+const MemoizedIcon = React.memo(AlertIcon)
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const style = {
+  display: 'flex',
+  flexDirection: 'column',
+  width: '200px'
 }
 
-export default App;
+const App = () => {
+  const [state, setState] = React.useState(0)
+  const [memoized, setMemoized] = React.useState(false)
+
+  const inc = React.useCallback(() => void setState((state) => state + 1), [])
+  const toggleMemo = React.useCallback(() => void setMemoized(state => !state), [])
+
+  return (
+    <div style={style}>
+      <button onClick={inc}>toggle update {state}</button>
+      <button onClick={toggleMemo}>{memoized ? 'using memoized' : 'not memoized'}</button>
+      <div>
+        { memoized ? <MemoizedIcon />: <AlertIcon />}
+        { memoized ? <MemoizedIcon />: <AlertIcon />}
+        { memoized ? <MemoizedIcon />: <AlertIcon />}
+        { memoized ? <MemoizedIcon />: <AlertIcon />}
+        { memoized ? <MemoizedIcon />: <AlertIcon />}
+        { memoized ? <MemoizedIcon />: <AlertIcon />}
+        { memoized ? <MemoizedIcon />: <AlertIcon />}
+        { memoized ? <MemoizedIcon />: <AlertIcon />}
+        { memoized ? <MemoizedIcon />: <AlertIcon />}
+        { memoized ? <MemoizedIcon />: <AlertIcon />}
+        { memoized ? <MemoizedIcon />: <AlertIcon />}
+      </div>
+    </div>
+  )
+}
+export default App
